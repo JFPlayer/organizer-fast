@@ -1,0 +1,58 @@
+.table-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.table-progress-list {
+  flex-grow: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  overflow: hidden;
+}
+
+.table-progress-column {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.table-progress-title {
+  font-size: 24px;
+  text-align: center;
+}
+
+.task-list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
+  overflow-y: auto;
+}
+
+.task-item {
+  background-color: red;
+  width: 100%;
+  min-height: 150px;
+}
+
+
+.table-footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.work-space {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.work-space-member {
+  
+}
