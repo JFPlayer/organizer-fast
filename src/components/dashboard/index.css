@@ -3,5 +3,61 @@
   width: calc(100% - 40px);
   height: 80vh;
   background-color: gray;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-container--header {
+  width: 100%;
   padding: 16px;
+  border-bottom: 2px solid black;
+}
+
+.dashboard-container--header h1 {
+  margin: 0;
+}
+
+.dashboard-container--layout-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.dashboard-container--layout-left {
+  height: 100%;
+  width: 25%;
+  border-right: 2px solid black;
+  display: flex;
+  flex-direction: column;
+
+  font-size: 24px;
+}
+
+.dashboard-container--layout-right {
+  height: 100%;
+  width: 75%;
+  padding: 16px;
+}
+
+.dashboard-title {
+  padding: 16px;
+}
+
+.dashboard-menu {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  gap: 8px;
+}
+
+.dashboard-menu-item {
+  padding: 0 16px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.dashboard-menu-item.selected {
+  background-color: darkgray;
 }

@@ -1,73 +1,44 @@
 import { FunctionComponent, useState } from "react";
-import {
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-} from '@ant-design/icons';
-import { Layout, Menu, Button } from 'antd';
-
-const { Header, Sider, Content } = Layout;
 
 import './index.css';
+import Tables from "../tables";
+import Members from "../members";
+import Table from "../table";
+import { DashboardMenu } from "./types";
 
 const Dashboard: FunctionComponent = () => {
-  const [collapsed, setCollapsed] = useState(false);
+  const [currentMenu, setCurrentMenu] = useState(DashboardMenu.Tables);
+  const [currentTable, setCurrentTable] = useState('');
+
+  const onSelectTable = (table: string) => {
+    setCurrentMenu(DashboardMenu.Table);
+    setCurrentTable(table);
+  }
 
   return (
-    <div className="login-container">
-      <Layout>
-        <Sider trigger={null} collapsible collapsed={collapsed}>
-          <div className="demo-logo-vertical" />
-          <Menu
-            theme="dark"
-            mode="inline"
-            defaultSelectedKeys={['1']}
-            items={[
-              {
-                key: '1',
-                icon: <UserOutlined />,
-                label: 'nav 1',
-              },
-              {
-                key: '2',
-                icon: <VideoCameraOutlined />,
-                label: 'nav 2',
-              },
-              {
-                key: '3',
-                icon: <UploadOutlined />,
-                label: 'nav 3',
-              },
-            ]}
-          />
-        </Sider>
-        <Layout>
-          <Header style={{ padding: 0, background: 'red' }}>
-            <Button
-              type="text"
-              icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-              onClick={() => setCollapsed(!collapsed)}
-              style={{
-                fontSize: '16px',
-                width: 64,
-                height: 64,
-              }}
-            />
-          </Header>
-          <Content
-            style={{
-              margin: '24px 16px',
-              padding: 24,
-              minHeight: 280,
-              background: 'green',
-            }}
-          >
-            Content
-          </Content>
-        </Layout>
-      </Layout>
+    <div className="dashboard-container">
+      <header className="dashboard-container--header">
+        <h1>Nombre del usuario</h1>
+      </header>
+
+      <main className="dashboard-container--layout-container">
+        <div className="dashboard-container--layout-left">
+          <div className="dashboard-title">
+            OrganizerFast
+          </div>
+          
+          <div className="dashboard-menu">
+            <div className={`dashboard-menu-item ${currentMenu === DashboardMenu.Tables || currentMenu === DashboardMenu.Table ? 'selected' : ''}`} onClick={() => setCurrentMenu(DashboardMenu.Tables)}>Tableros</div>
+            <div className={`dashboard-menu-item ${currentMenu === DashboardMenu.Members ? 'selected' : ''}`} onClick={() => setCurrentMenu(DashboardMenu.Members)}>Miembros</div>
+          </div>
+        </div>
+
+        <div className="dashboard-container--layout-right">
+          {currentMenu === DashboardMenu.Tables && <Tables onSelect={onSelectTable} />}
+          {currentMenu === DashboardMenu.Members && <Members />}
+          {currentMenu === DashboardMenu.Table && <Table table={currentTable} userList={[]} />}
+        </div>
+      </main>
     </div>
   )
 }
