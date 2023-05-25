@@ -1,13 +1,15 @@
 .dashboard-container {
   margin: auto;
   width: calc(100% - 40px);
-  height: 80vh;
+  min-height: 80vh;
   background-color: gray;
   display: flex;
   flex-direction: column;
 }
 
 .dashboard-container--header {
+  display: flex;
+  justify-content: space-between;
   width: 100%;
   padding: 16px;
   border-bottom: 2px solid black;
@@ -21,10 +23,11 @@
   width: 100%;
   height: 100%;
   display: flex;
+  overflow: hidden;
+  flex-grow: 1;
 }
 
 .dashboard-container--layout-left {
-  height: 100%;
   width: 25%;
   border-right: 2px solid black;
   display: flex;
@@ -34,7 +37,6 @@
 }
 
 .dashboard-container--layout-right {
-  height: 100%;
   width: 75%;
   padding: 16px;
 }

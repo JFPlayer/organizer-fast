@@ -9,11 +9,12 @@ dayjs.extend(customParseFormat);
 import './index.css';
 import { Activity, ActivityProgress } from "./types";
 import { User } from "../../model/user";
+import ActivityItem from "./activity-item";
 
 const dateFormat = 'YYYY/MM/DD';
 
-const Table: FunctionComponent<Props> = ({table, userList}) => {
-  const [activityList, setActivityList] = useState<Activity[]>([]);
+const Table: FunctionComponent<Props> = ({table, userList, activityList, onUpdateActivities}) => {
+  
   const [currentActivity, setCurrentActivity] = useState<Activity | undefined>();
 
   const [openAddActivity, setOpenAddActivity] = useState(false);
@@ -54,12 +55,12 @@ const Table: FunctionComponent<Props> = ({table, userList}) => {
       progress: ActivityProgress.Pending,
     }
 
-    setActivityList(prev => [...prev, newActivity])
+    onUpdateActivities([...activityList, newActivity])
     
     setOpenAddActivity(false);
   }
 
-  const onConfirmUpdatectivity = () => {
+  const onConfirmUpdateActivity = () => {
     const _activityList = [...activityList];
     const formValues = activityForm.getFieldsValue();
 
@@ -77,10 +78,14 @@ const Table: FunctionComponent<Props> = ({table, userList}) => {
 
     if(updatedActivityIndex >= 0) {
       _activityList.splice(updatedActivityIndex, 1, updatedActivity)
-      setActivityList(_activityList)
+      onUpdateActivities(_activityList)
     }
 
     setCurrentActivity(undefined);
+  }
+
+  const getUser = (email?: string): User | undefined => {
+    return userList.find(user => user.email === email)
   }
 
   return (
@@ -93,9 +98,7 @@ const Table: FunctionComponent<Props> = ({table, userList}) => {
           <div className="table-progress-title">Pendiente</div>
           <div className="task-list">
             {activityList.filter((activity) => activity.progress === ActivityProgress.Pending).map((activity) => (
-              <div key={activity.id} className="task-item" onClick={() => onSelectActivity(activity)}>
-                {activity.description}
-              </div>
+              <ActivityItem key={activity.id} user={getUser(activity.assignedUser)} activity={activity} onClick={() => onSelectActivity(activity)} />
             ))}
           </div>
         </div>
@@ -104,9 +107,7 @@ const Table: FunctionComponent<Props> = ({table, userList}) => {
           <div className="table-progress-title">En progreso</div>
           <div className="task-list">
             {activityList.filter((activity) => activity.progress === ActivityProgress.InProgress).map((activity) => (
-              <div key={activity.id} className="task-item" onClick={() => onSelectActivity(activity)}>
-                {activity.description}
-              </div>
+              <ActivityItem key={activity.id} user={getUser(activity.assignedUser)} activity={activity} onClick={() => onSelectActivity(activity)} />
             ))}
           </div>
         </div>
@@ -115,9 +116,7 @@ const Table: FunctionComponent<Props> = ({table, userList}) => {
           <div className="table-progress-title">Finalizado</div>
           <div className="task-list">
             {activityList.filter((activity) => activity.progress === ActivityProgress.Done).map((activity) => (
-              <div key={activity.id} className="task-item" onClick={() => onSelectActivity(activity)}>
-                {activity.description}
-              </div>
+              <ActivityItem key={activity.id} user={getUser(activity.assignedUser)} activity={activity} onClick={() => onSelectActivity(activity)} />
             ))}
           </div>
         </div>
@@ -154,7 +153,7 @@ const Table: FunctionComponent<Props> = ({table, userList}) => {
             <Button key="back" onClick={() => setCurrentActivity(undefined)}>
               Volver
             </Button>,
-            <Button key="submit" type="primary" onClick={onConfirmUpdatectivity}>
+            <Button key="submit" type="primary" onClick={onConfirmUpdateActivity}>
               Actualizar
             </Button>,
           ]}
@@ -204,4 +203,6 @@ export default Table;
 interface Props {
   table: string;
   userList: User[];
+  activityList: Activity[];
+  onUpdateActivities: (activity: Activity[]) => void;
 }

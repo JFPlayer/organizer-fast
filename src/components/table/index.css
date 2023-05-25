@@ -35,12 +35,6 @@
   overflow-y: auto;
 }
 
-.task-item {
-  background-color: red;
-  width: 100%;
-  min-height: 150px;
-}
-
 
 .table-footer {
   display: flex;

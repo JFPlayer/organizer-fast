@@ -4,13 +4,13 @@ import {PlusOutlined} from '@ant-design/icons'
 
 import './index.css';
 
-const Tables: FunctionComponent<Props> = ({onSelect}) => {
+const Tables: FunctionComponent<Props> = ({onSelect, onCreateTablet, tables}) => {
   const [openAddTable, setOpenAddTable] = useState(false);
   const [newTableName, setNewTableName] = useState('');
-  const [tables, setTables] = useState<string[]>([]);
+  
   
   const onConfirmAddTable = () => {
-    setTables(prev => [...prev, newTableName])
+    onCreateTablet(newTableName)
     setOpenAddTable(false);
   }
 
@@ -41,4 +41,6 @@ export default Tables;
 
 interface Props {
   onSelect: (table: string) => void;
+  tables: string[];
+  onCreateTablet: (table: string) => void;
 }

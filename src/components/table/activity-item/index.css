@@ -1,0 +1,26 @@
+.activity-item-container {
+  width: 100%;
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  justify-content: space-between;
+}
+
+.activity-item-container.pending {
+  background-color: red;
+}
+.activity-item-container.in-progress {
+  background-color: orange;
+}
+.activity-item-container.done {
+  background-color: green;
+}
+
+.activity-item-description {
+  align-self: center;
+}
+
+.activity-item-user-info {
+  align-self: flex-end;
+}

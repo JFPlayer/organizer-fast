@@ -1,50 +1,32 @@
 import { FunctionComponent } from "react";
-import { UserOutlined } from '@ant-design/icons'
+import {UserOutlined} from '@ant-design/icons'
 
 import './index.css';
+import { User } from "../../model/user";
 
-const Members: FunctionComponent = () => {
+const Members: FunctionComponent<Props> = ({users}) => {
 
   return (
     <div className="members-container">
       <h1>Miembros</h1>
       
       <div className="member-list">
-        
-        <div className="member-item">
-          <div className="member-icon-container">
-            <UserOutlined className="member-icon"/>
+        {users.map((user) => (
+          <div className="member-item">
+            <div className="member-icon-container">
+              <UserOutlined className="member-icon"/>
+            </div>
+            <div className="member-name">{`${user.firstName} ${user.lastName}`}</div>
           </div>
-          <div className="member-name">Miembro 1</div>
-        </div>
-
-        <div className="member-item">
-          <div className="member-icon-container">
-            <UserOutlined className="member-icon"/>
-          </div>
-          <div className="member-name">Miembro 2</div>
-        </div>
-
-        <div className="member-item">
-          <div className="member-icon-container">
-            <UserOutlined className="member-icon"/>
-          </div>
-          <div className="member-name">Miembro 3</div>
-        </div>
-
-        <div className="member-item">
-          <div className="member-icon-container">
-            <UserOutlined className="member-icon"/>
-          </div>
-          <div className="member-name">Miembro 4</div>
-        </div>
+        ))}
       </div>
+      
     </div>
   )
 }
 
 export default Members;
 
-// interface Props {
-//   onSubmit: (formFields: RegisterForm) => void;
-// }
+interface Props {
+  users: User[];
+}

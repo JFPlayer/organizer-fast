@@ -21,7 +21,7 @@ const Register: FunctionComponent<Props> = ({ onSubmit }) => {
       >
         <Form.Item
           label="Nombre"
-          name="fistName"
+          name="firstName"
         >
           <Input />
         </Form.Item>

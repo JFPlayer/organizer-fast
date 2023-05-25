@@ -1,12 +1,16 @@
 .members-container {
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .member-list {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 32px;
+  flex-grow: 1;
+  overflow-y: auto;
 }
 
 .member-item {
