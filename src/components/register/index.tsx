@@ -2,10 +2,11 @@ import { FunctionComponent } from "react";
 import { Button, Radio, Form, Input, DatePicker } from 'antd';
 
 import './index.css';
+import { RegisteredUser } from "../../model/user";
 
 const Register: FunctionComponent<Props> = ({ onSubmit }) => {
 
-  const onSubmitForm = (values: RegisterForm) => {
+  const onSubmitForm = (values: RegisteredUser) => {
     onSubmit({...values, birthdayDate: new Date(values.birthdayDate).toISOString()})
   }
 
@@ -75,14 +76,5 @@ const Register: FunctionComponent<Props> = ({ onSubmit }) => {
 export default Register;
 
 interface Props {
-  onSubmit: (formFields: RegisterForm) => void;
-}
-
-export interface RegisterForm {
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-  birthdayDate: string;
-  sex: 'male' | 'female';
+  onSubmit: (formFields: RegisteredUser) => void;
 }

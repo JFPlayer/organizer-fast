@@ -3,24 +3,23 @@ import './index.css'
 import 'antd/dist/reset.css';
 import Login from './components/login';
 import { Screen } from './types';
-import Register, { RegisterForm } from './components/register';
+import Register from './components/register';
 import Dashboard from './components/dashboard';
 import { Button } from 'antd';
-import { User } from './model/user';
+import { RegisteredUser, User } from './model/user';
 
-type RegisterUser = RegisterForm;
 
 function App() {
   const [screen, setScreen] = useState(Screen.Main);
   const [loggedUser, setLoggedUser] = useState<User | undefined>();
-  const [userList, setUserList] = useState<RegisterUser[]>([]);
+  const [userList, setUserList] = useState<RegisteredUser[]>([]);
 
   const onSubmitLogin = (user: User) => {
     setLoggedUser(user);
     setScreen(Screen.Dashboard);
   }
 
-  const onSubmitRegister = (formFields: RegisterForm) => {
+  const onSubmitRegister = (formFields: RegisteredUser) => {
     setUserList(prev => [...prev, formFields]);
     
     setScreen(Screen.Main);

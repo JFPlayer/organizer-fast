@@ -3,3 +3,9 @@ export interface User {
   lastName: string;
   email: string;
 }
+
+export interface RegisteredUser extends User{
+  password: string;
+  birthdayDate: string;
+  sex: 'male' | 'female';
+}

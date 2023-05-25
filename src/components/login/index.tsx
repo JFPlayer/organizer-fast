@@ -2,8 +2,7 @@ import { FunctionComponent } from "react";
 import { Button, Checkbox, Form, Input } from 'antd';
 
 import './index.css';
-import { User } from "../../model/user";
-import { RegisterForm } from "../register";
+import { RegisteredUser, User } from "../../model/user";
 
 const Login: FunctionComponent<Props> = ({ onSubmit, users }) => {
 
@@ -65,7 +64,7 @@ export default Login;
 
 interface Props {
   onSubmit: (user: User) => void;
-  users: RegisterForm[];
+  users: RegisteredUser[];
 }
 
 export interface LoginForm {
